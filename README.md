@@ -24,7 +24,7 @@ cmd-exporter is a tool designed for Linux that collects data based on linux com
 </tr>
 <tr>
 <td>timeout_server</td>
-<td>Maximum duration for reading the entire request, including the body. A zero or negative value means there will be no timeout.</td>
+<td>Maximum duration for reading the entire request, including the body. A zero or negative value means there will be no timeout. (seconds)</td>
 <td>5</td>
 <td>Yes</td>
 </tr>
