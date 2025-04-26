@@ -65,3 +65,23 @@ cmd-exporter is a tool designed for Linux that collects data based on linux com
 <td>Yes</td>
 </tr>
 </tbody></table>
+
+## Example Config
+
+```
+port: 9126
+timeout_server: 5
+username: test
+password: test
+certfile: "server.crt"
+keyfile: "server.key"
+metrics:
+  - process_name: "cpu_usage"
+    command: "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage }' |  xargs printf '%.*f\\n' '2'"  
+  - process_name: "ram_usage"
+    command: "free | grep Mem | awk '{print $3/$2 * 100}' | xargs printf '%.*f\\n' '2'"   
+  - process_name: "disk_usage"
+    command: "df -h --total | tail -n 1 | awk '{print $5}' | tr -d '%'"
+  - process_name: "cpu_temp"
+    command: "echo $(vcgencmd measure_temp | sed -E 's/[^0-9]+C//' | sed -E 's/[^0-9]+//')"
+```
